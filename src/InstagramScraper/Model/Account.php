@@ -197,6 +197,12 @@ class Account extends AbstractModel
                 $this->fullName = $value;
                 break;
             case 'profile_pic_url':
+                // do not override if an HD profile pic is already assigned
+                if($this->profilePicUrl === null || $this->profilePicUrl === '') {
+                    $this->profilePicUrl = $value;
+                }
+                break;
+            case 'profile_pic_url_hd':
                 $this->profilePicUrl = $value;
                 break;
             case 'biography':
