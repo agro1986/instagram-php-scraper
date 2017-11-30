@@ -492,6 +492,10 @@ class Instagram
             throw new \InvalidArgumentException('User id must be integer or integer wrapped in string');
         }
 
+        if ($this->sessionUsername === null) {
+            throw new \Exception('You must be logged in to search by id.');
+        }
+
         $url = Endpoints::getFollowUrl($id);
 
         // Cut a request by disabling redirects.
