@@ -186,6 +186,11 @@ class Instagram
         $medias = [];
         $isMoreAvailable = true;
         while ($index < $count && $isMoreAvailable) {
+            if(count($medias) > 0) {
+                $microsec = rand($this->pagingDelayMinimumMicrosec, $this->pagingDelayMaximumMicrosec);
+                usleep($microsec);
+            }
+
             $response = Request::get(Endpoints::getAccountMediasJsonLink($username, $maxId), $this->generateHeaders($this->userSession));
             if (static::HTTP_OK !== $response->code) {
                 throw new InstagramException('Response code is ' . $response->code . '. Body: ' . static::getErrorBody($response->body) . ' Something went wrong. Please report issue.');
